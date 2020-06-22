@@ -1,0 +1,19 @@
+version: '3'
+services: 
+  db:
+    image: mongo
+    build: mongo
+    restart: always
+    ports: 
+      - "27017:27017"
+    volumes: 
+      - ./mongo/mongo_db:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+  node:
+    image: node
+    build: node
+    ports: 
+      - "8080:8080"
+    tty: true
