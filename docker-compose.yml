@@ -8,12 +8,15 @@ services:
       - "27017:27017"
     volumes: 
       - ./mongo/mongo_db:/data/db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+    command: mongod
+    env_file: ./mongo/.env
   node:
     image: node
     build: node
     ports: 
       - "8080:8080"
     tty: true
+    links: 
+      - db
+    depends_on: 
+      - db
